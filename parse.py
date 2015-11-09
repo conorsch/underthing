@@ -20,12 +20,15 @@ with open(filename, 'rU') as datafile:
 times_of_day = np.array([ np.float(d[0]) for d in sewer_data_condensed ])
 flow_rates = np.array([ np.float(d[1]) for d in sewer_data_condensed ])
 
-coefficients = np.polyfit(times_of_day, flow_rates, 10)
+coefficients = np.polyfit(times_of_day, flow_rates, 50)
 estimate = np.poly1d(coefficients)
 
-x = np.linspace(0, 24, 1000)
-_ = plt.plot(times_of_day, flow_rates, x, estimate(x))
+for i in range(0, 10):
+    x = np.linspace(0, 24 * 7, 10)
+    _ = plt.plot(x, estimate(x))
+
+
+_ = plt.scatter(times_of_day, flow_rates)
+
 plt.show()
-
-
 
